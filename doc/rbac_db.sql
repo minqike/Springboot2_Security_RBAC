@@ -50,7 +50,7 @@ CREATE TABLE `sys_role` (
 -- Records of sys_role
 -- ----------------------------
 INSERT INTO `sys_role` VALUES ('1', 'admin', '管理员');
-INSERT INTO `sys_role` VALUES ('2', 'add_user', '添加管理员');
+INSERT INTO `sys_role` VALUES ('2', 'user', '添加管理员');
 
 -- ----------------------------
 -- Table structure for sys_role_permission
@@ -96,8 +96,8 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'admin', '张三', '15a013bcac0c50049356b322e955035e\r\n', '2018-11-13', '2018-11-13', '1', '1', '1', '1');
-INSERT INTO `sys_user` VALUES ('2', 'userAdd', '小余', '15a013bcac0c50049356b322e955035e\r\n', '2018-11-13', '2018-11-13', '1', '1', '1', '1');
+INSERT INTO `sys_user` VALUES ('1', 'admin', '张三', 'a09fea8ff3b9c3e135414f16cf06de21', '2018-11-13', '2018-11-13', '1', '1', '1', '1');
+INSERT INTO `sys_user` VALUES ('2', 'userAdd', '小余', 'a09fea8ff3b9c3e135414f16cf06de21', '2018-11-13', '2018-11-13', '1', '1', '1', '1');
 
 -- ----------------------------
 -- Table structure for sys_user_role
