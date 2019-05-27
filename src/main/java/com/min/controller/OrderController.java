@@ -18,25 +18,25 @@ public class OrderController {
 	}
 
 	// 查询订单
-	@RequestMapping("/showOrder")
+	@RequestMapping("/order/show")
 	public String showOrder() {
 		return "showOrder";
 	}
 
 	// 添加订单
-	@RequestMapping("/addOrder")
+	@RequestMapping("/order/add")
 	public String addOrder() {
 		return "addOrder";
 	}
 
 	// 修改订单
-	@RequestMapping("/updateOrder")
+	@RequestMapping("/order/update")
 	public String updateOrder() {
 		return "updateOrder";
 	}
 
 	// 删除订单
-	@RequestMapping("/deleteOrder")
+	@RequestMapping("/order/delete")
 	public String deleteOrder() {
 		return "deleteOrder";
 	}

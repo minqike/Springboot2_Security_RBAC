@@ -3,11 +3,14 @@ package com.min.config;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -34,6 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	// 配置认证用户信息和权限
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		//采用自定义PasswordEncoder
 		auth.userDetailsService(myUserDetailService).passwordEncoder(new PasswordEncoder() {
 
 			public boolean matches(CharSequence rawPassword, String encodedPassword) {
@@ -50,6 +54,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				return MD5Util.encode((String) rawPassword);
 			}
 		});
+		System.out.println(passwordEncoder().encode("123456"));
+		//采用注入PasswordEncoder bean的方法（BCryptPasswordEncoder），看代码最下面
+		//$2a$10$/5qaysSRNwPpjuNahi/wTeJ7nlJaV3teuC4H5KjQ9FT5sybUcr0oe
+//		auth.userDetailsService(myUserDetailService).passwordEncoder(passwordEncoder());
+
 		// // 添加admin账号
 		// auth.inMemoryAuthentication().withUser("admin").password("123456").
 		// authorities("showOrder","addOrder","updateOrder","deleteOrder","findUser");
@@ -85,8 +94,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	// @Bean
-	// public static NoOpPasswordEncoder passwordEncoder() {
-	// return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
-	// }
+	//	// public static NoOpPasswordEncoder passwordEncoder() {
+	//	// return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
+	//	// }
+
+	 @Bean
+	 public static BCryptPasswordEncoder passwordEncoder() {
+	 return new BCryptPasswordEncoder();
+	 }
 
 }
